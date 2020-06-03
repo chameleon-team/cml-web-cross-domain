@@ -1,0 +1,22 @@
+{
+  "name": "dev-proxy",
+  "version": "1.0.0",
+  "description": "A chameleon project",
+  "author": "",
+  "private": true,
+  "scripts": {
+    "dev":"cml web dev ",
+    "server":" node server/index.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "chameleon-api": "1.0.0",
+    "chameleon-runtime": "1.0.1",
+    "chameleon-store": "1.0.1",
+    "chameleon-ui-builtin": "1.0.6",
+    "cml-ui": "1.0.3",
+    "ip": "^1.1.5",
+    "koa": "^2.12.0",
+    "portfinder": "^1.0.26"
+  }
+}
