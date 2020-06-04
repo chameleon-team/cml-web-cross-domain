@@ -5,8 +5,6 @@ title:数据请求
 
 ## web端跨域能力
 
-`chameleon-tool@1.0.6-alpha.6 ` 版本开始支持
-
 在项目中执行 `cml web dev ` 启动项目
 然后在新开一个终端 执行 `npm run server` 在本地启动一个服务用来测试跨域
 
@@ -51,6 +49,8 @@ handleMock(){
 
 * 一般情况下，我们直接使用数据mock可以解决大部分问题。
 
+`chameleon-tool@1.0.6-alpha.6 `之前的版本不支持以配置的形式在web端开发进行跨域相关的配置；不过可以通过 `charles`代理进行解决。
+
 * 如果遇到浏览器的跨域问题，也可以通过设置代理的方式进行解决，比如网上随便搜下`charles 代理设置跨域`，都能找到解决方案。
 
 [charles如何设置代理跨域](https://juejin.im/post/5a1033d2f265da431f4aa81f)
@@ -73,6 +73,41 @@ ifanqi.me下的页面就可以访问百度的接口啦。有兴趣的同学可�
 
 * 为了方便开发者,我们内置支持了配置选项，支持直接配置【web端跨域】
 
+`chameleon-tool@1.0.6-alpha.6 ` 开始支持
+
+devProxy 支持一个数组，可以支持对多个域名的跨域需求。
+具体的配置参考:
+
+[http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware)
+
+```javascript
+
+const express = require('express');
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
+const app = express();
+//配置中的path 和 options 分别对应如下
+app.use('/proxy', createProxyMiddleware({ target: 'http://${ipAddress}:${port}/', changeOrigin: true }));
+app.listen(3000);
+```
+
+```javascript
+web: {
+    dev: {
+      devProxy:[{
+        path:'/proxy',
+        options:{
+          target: `http://${ipAddress}:${port}/`, 
+          changeOrigin: true
+        }
+      }],
+    },
+    build:{
+
+    }
+}
+
+```
 
 
 
